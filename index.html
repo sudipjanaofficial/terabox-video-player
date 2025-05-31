@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>টেরাবক্স ভিডিও প্লেয়ার</title>
+    <title>টেরাবক্স ভিডিও প্লেয়ার - PureFinance.online</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -16,7 +16,7 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background: white;
+            background: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -43,21 +43,19 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
-            display: block;
-            width: 100%;
+            margin-top: 10px;
         }
         button:hover {
             background-color: #2980b9;
         }
-        #video-container {
+        #player-container {
             margin-top: 20px;
             display: none;
         }
-        #video-frame {
+        #video-player {
             width: 100%;
             height: 450px;
-            border: none;
-            border-radius: 4px;
+            background-color: #000;
         }
         .instructions {
             background-color: #f8f9fa;
@@ -65,9 +63,11 @@
             border-radius: 4px;
             margin-top: 30px;
         }
-        .note {
-            color: #e74c3c;
-            font-weight: bold;
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -80,43 +80,13 @@
             <button onclick="loadVideo()">ভিডিও লোড করুন</button>
         </div>
         
-        <div id="video-container">
-            <iframe id="video-frame" allowfullscreen></iframe>
+        <div id="player-container">
+            <video id="video-player" controls>
+                আপনার ব্রাউজার ভিডিও এলিমেন্ট সাপোর্ট করে না।
+            </video>
         </div>
         
         <div class="instructions">
             <h3>ব্যবহার বিধি:</h3>
             <ol>
-                <li>টেরাবক্স ভিডিও লিঙ্ক কপি করুন (যেমন: https://www.terabox.com/wap/share/filetransfer?xxxx)</li>
-                <li>লিঙ্কটি উপরের বক্সে পেস্ট করুন</li>
-                <li>"ভিডিও লোড করুন" বাটনে ক্লিক করুন</li>
-            </ol>
-            <p class="note">নোট: কিছু ভিডিও সিকিউরিটি কারণে প্লে নাও হতে পারে। এটি টেরাবক্সের রেস্ট্রিকশনের কারণে হতে পারে।</p>
-        </div>
-    </div>
-
-    <script>
-        function loadVideo() {
-            const videoUrl = document.getElementById('video-url').value.trim();
-            
-            if (!videoUrl) {
-                alert('দয়া করে একটি ভিডিও লিঙ্ক প্রবেশ করুন');
-                return;
-            }
-            
-            // Check if it's a TeraBox URL
-            if (!videoUrl.includes('terabox.com')) {
-                alert('দয়া করে একটি বৈধ টেরাবক্স ভিডিও লিঙ্ক প্রবেশ করুন');
-                return;
-            }
-            
-            // Create embed URL (Note: TeraBox may not have official embed support)
-            // This is a workaround that may not always work
-            const embedUrl = `https://www.terabox.com/embed/${videoUrl.split('/').pop()}`;
-            
-            document.getElementById('video-frame').src = embedUrl;
-            document.getElementById('video-container').style.display = 'block';
-        }
-    </script>
-</body>
-</html>
+                <li>টেরাবক্স থেকে ভিডিও লিঙ্ক কপি করুন (যেমন: https://www.terabox.com/wap
