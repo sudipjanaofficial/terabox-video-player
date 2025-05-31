@@ -16,7 +16,7 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background: #fff;
+            background: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -48,26 +48,37 @@
         button:hover {
             background-color: #2980b9;
         }
-        #player-container {
+        .video-container {
             margin-top: 20px;
-            display: none;
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
         }
-        #video-player {
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 450px;
-            background-color: #000;
+            height: 100%;
+            border: none;
         }
         .instructions {
             background-color: #f8f9fa;
             padding: 15px;
             border-radius: 4px;
-            margin-top: 30px;
+            margin-top: 20px;
         }
         footer {
             text-align: center;
-            margin-top: 30px;
-            color: #7f8c8d;
+            margin-top: 20px;
             font-size: 14px;
+            color: #7f8c8d;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
         }
     </style>
 </head>
@@ -76,17 +87,58 @@
         <h1>টেরাবক্স ভিডিও প্লেয়ার</h1>
         
         <div class="input-group">
-            <input type="text" id="video-url" placeholder="টেরাবক্স ভিডিও লিঙ্ক এখানে প্রবেশ করুন...">
+            <input type="text" id="videoUrl" placeholder="টেরাবক্স ভিডিও URL লিখুন (যেমন: https://www.terabox.com/...)" required>
             <button onclick="loadVideo()">ভিডিও লোড করুন</button>
         </div>
         
-        <div id="player-container">
-            <video id="video-player" controls>
-                আপনার ব্রাউজার ভিডিও এলিমেন্ট সাপোর্ট করে না।
-            </video>
+        <div class="video-container" id="playerContainer" style="display: none;">
+            <iframe id="videoPlayer" allowfullscreen></iframe>
         </div>
         
         <div class="instructions">
             <h3>ব্যবহার বিধি:</h3>
             <ol>
-                <li>টেরাবক্স থেকে ভিডিও লিঙ্ক কপি করুন (যেমন: https://www.terabox.com/wap
+                <li>টেরাবক্সে আপনার ভিডিওটি খুলুন</li>
+                <li>ভিডিও URL কপি করুন (ঠিকানা বারের লিংক)</li>
+                <li>উপরের বক্সে URL পেস্ট করুন</li>
+                <li>"ভিডিও লোড করুন" বাটনে ক্লিক করুন</li>
+                <li>ভিডিওটি প্লে হবে!</li>
+            </ol>
+            <p><strong>দ্রষ্টব্য:</strong> কিছু ভিডিও সীমাবদ্ধতার কারণে প্লে নাও হতে পারে।</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2023 PureFinance.online - সমস্ত অধিকার সংরক্ষিত</p>
+    </footer>
+
+    <script>
+        function loadVideo() {
+            const videoUrl = document.getElementById('videoUrl').value.trim();
+            
+            if (!videoUrl) {
+                alert('দয়া করে একটি টেরাবক্স ভিডিও URL লিখুন');
+                return;
+            }
+            
+            // Check if it's a TeraBox URL
+            if (!videoUrl.includes('terabox.com')) {
+                alert('দয়া করে একটি বৈধ টেরাবক্স ভিডিও URL লিখুন');
+                return;
+            }
+            
+            // Extract the video ID or use the URL directly
+            // Note: This is a simplified approach. TeraBox may require more complex embedding
+            const playerContainer = document.getElementById('playerContainer');
+            const videoPlayer = document.getElementById('videoPlayer');
+            
+            // Try to embed the video (may not work due to TeraBox restrictions)
+            videoPlayer.src = videoUrl;
+            playerContainer.style.display = 'block';
+            
+            // Scroll to the player
+            playerContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
